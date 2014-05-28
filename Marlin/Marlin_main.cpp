@@ -119,6 +119,7 @@
 // M109 - Sxxx Wait for extruder current temp to reach target temp. Waits only when heating
 //        Rxxx Wait for extruder current temp to reach target temp. Waits when heating and cooling
 //        IF AUTOTEMP is enabled, S<mintemp> B<maxtemp> F<factor>. Exit autotemp by any M109 without F
+// M112 - Emergency stop
 // M114 - Output current position to serial port
 // M115 - Capabilities string
 // M117 - display message
@@ -673,6 +674,11 @@ void get_command()
           }
 
         }
+
+        //If command was e-stop process now
+        if(strcmp(cmdbuffer[bufindw], "M112") == 0)
+          kill();
+        
         bufindw = (bufindw + 1)%BUFSIZE;
         buflen += 1;
       }
@@ -1829,6 +1835,9 @@ void process_commands()
         setTargetHotend1(code_value() == 0.0 ? 0.0 : code_value() + duplicate_extruder_temp_offset);
 #endif
       setWatch();
+      break;
+    case 112: //  M112 -Emergency Stop
+      kill();
       break;
     case 140: // M140 set bed temp
       if (code_seen('S')) setTargetBed(code_value());
@@ -3426,6 +3435,9 @@ void handle_status_leds(void) {
 
 void manage_inactivity()
 {
+  if(buflen < (BUFSIZE-1))
+    get_command();
+
   if( (millis() - previous_millis_cmd) >  max_inactive_time )
     if(max_inactive_time)
       kill();
