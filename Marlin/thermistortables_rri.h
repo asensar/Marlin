@@ -4,7 +4,9 @@
 #include "Marlin.h"
 
 
-#if (THERMISTORHEATER_0 == 80) || (THERMISTORHEATER_1 == 80)  || (THERMISTORHEATER_2 == 80) || (THERMISTORBED == 80) //100k Reprap-india.com thermistor
+#if (THERMISTORHEATER_0 == 80) || (THERMISTORHEATER_1 == 80)  || (THERMISTORHEATER_2 == 80) || (THERMISTORBED == 80) 
+// Thermistor lookup table for 100k glass thermistor from Reprap-india.com 
+// Created by aSensar
  
 const short temptable_80[][2] PROGMEM = {
 {       21*OVERSAMPLENR         ,       270     },
@@ -64,5 +66,48 @@ const short temptable_80[][2] PROGMEM = {
 {       1017*OVERSAMPLENR       ,       0       } //safety
 };
 #endif
+
+#if (THERMISTORHEATER_0 == 81) || (THERMISTORHEATER_1 == 81)  || (THERMISTORHEATER_2 == 81) || (THERMISTORBED == 81) 
+// Thermistor lookup table for 100k Black thermistor from Reprap-india.com 
+// Created by aSensar
+// beta: 3950
+
+const short temptable_81[][2] PROGMEM = {
+    {97*OVERSAMPLENR       ,       255}, 
+    {100*OVERSAMPLENR       ,       250}, 
+    {115*OVERSAMPLENR       ,       240}, 
+    {132*OVERSAMPLENR       ,       230}, 
+    {151*OVERSAMPLENR       ,       220}, 
+    {176*OVERSAMPLENR       ,       210}, 
+    {204*OVERSAMPLENR       ,       200}, 
+    {235*OVERSAMPLENR       ,       190}, 
+    {270*OVERSAMPLENR       ,       180}, 
+    {316*OVERSAMPLENR       ,       170}, 
+    {380*OVERSAMPLENR       ,       160}, 
+    {421*OVERSAMPLENR       ,       150}, 
+    {471*OVERSAMPLENR       ,       140}, 
+    {523*OVERSAMPLENR       ,       130}, 
+    {581*OVERSAMPLENR       ,       120}, 
+    {639*OVERSAMPLENR       ,       110}, 
+    {660*OVERSAMPLENR       ,       115}, 
+    {684*OVERSAMPLENR       ,       105},
+    {704*OVERSAMPLENR       ,       100},
+    {730*OVERSAMPLENR       ,       95},
+    {750*OVERSAMPLENR       ,       90},
+    {777*OVERSAMPLENR       ,       85},
+    {805*OVERSAMPLENR       ,       80},
+    {823*OVERSAMPLENR       ,       75},
+    {843*OVERSAMPLENR       ,       70},
+    {861*OVERSAMPLENR       ,       65},
+    {878*OVERSAMPLENR       ,       60},
+    {895*OVERSAMPLENR       ,       55},
+    {910*OVERSAMPLENR       ,       50},
+    {924*OVERSAMPLENR       ,       45},
+    {936*OVERSAMPLENR       ,       40},
+    {947*OVERSAMPLENR       ,       35},
+    {958*OVERSAMPLENR       ,       30}
+};
+#endif //Thermistor 81
+
 
 #endif //RRI_THERMISTORTABLES_H_
